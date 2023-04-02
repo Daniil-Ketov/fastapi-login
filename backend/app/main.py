@@ -1,18 +1,29 @@
 import uvicorn
 from fastapi import APIRouter, FastAPI
+from app.config import db
 
 
-app = FastAPI()
+def init_app():
+    db.init()
 
-router = APIRouter()
+    app = FastAPI(
+        title="Fastapi login app",
+        description="Login page",
+        version="1"
+    )
+
+    @app.on_event("startup")
+    async def startup():
+        await db.create_all()
+
+    @app.on_event("shutdown")
+    async def shutdown():
+        await db.close()
+
+    return app
 
 
-@router.get("/")
-async def home():
-    return "welcome home"
-
-
-app.include_router(router)
+app = init_app()
 
 
 def start():
