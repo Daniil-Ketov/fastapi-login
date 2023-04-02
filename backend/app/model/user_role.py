@@ -1,6 +1,6 @@
 from typing import Optional
 from sqlmodel import SQLModel, Field
-from backend.app.model.mixins import TimeMixin
+from app.model.mixins import TimeMixin
 
 
 class UsersRole(SQLModel, TimeMixin, table=True):
