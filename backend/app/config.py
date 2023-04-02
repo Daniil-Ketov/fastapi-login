@@ -5,6 +5,10 @@ from sqlmodel import SQLModel
 
 DB_CONFIG = f"postgresql+asyncpg://postgres:jojo@localhost:5433/test"
 
+SECRET_KEY = "fastapiReactLogin"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 
 class AsyncDatabaseSession:
 
