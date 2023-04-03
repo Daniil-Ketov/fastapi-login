@@ -1,7 +1,13 @@
 import uvicorn
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.config import db
 from app.service.auth_service import generate_role
+
+
+origins = [
+    "http://localhost:3000"
+]
 
 
 def init_app():
@@ -11,6 +17,14 @@ def init_app():
         title="Fastapi login app",
         description="Login page",
         version="1"
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
     )
 
     @app.on_event("startup")
