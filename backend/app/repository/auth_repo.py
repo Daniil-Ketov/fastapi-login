@@ -1,5 +1,4 @@
-from datetime import timedelta
-import datetime
+from datetime import timedelta, datetime
 from typing import Optional
 from jose import jwt
 from fastapi import Request, HTTPException
@@ -49,7 +48,7 @@ class JWTBearer(HTTPBearer):
             if not credentials.scheme == "Bearer":
                 raise HTTPException(status_code=403, detail={
                                     "status": "Forbidden", "message": "Invalid authentications schema."})
-            if not self.verify_jwt(credentials.credentials):
+            if not self.verify_token(credentials.credentials):
                 raise HTTPException(status_code=403, detail={
                                     "status": "Forbidden", "message": "Invalid token or expire token"})
             return credentials.credentials

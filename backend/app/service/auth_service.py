@@ -83,7 +83,7 @@ class AuthService:
         if _email is None:
             raise HTTPException(status_code=400, detail="Email not found")
         await UsersRepository.update_password(forgot_password.email,
-                                              pwd_context(forgot_password.new_password))
+                                              pwd_context.hash(forgot_password.new_password))
 
 
 # Generate roles manually

@@ -14,6 +14,6 @@ router = APIRouter(
 
 @router.post("/", response_model=ResponseSchema, response_model_exclude_none=True)
 async def get_user_profile(credentials: HTTPAuthorizationCredentials = Security(JWTBearer())):
-    token = JWTRepo().extract_token(credentials.credentials)
+    token = JWTRepo().extract_token(credentials)
     result = await UserService.get_user_profile(token['username'])
     return ResponseSchema(detail="Successfully fetch data!", result=result)

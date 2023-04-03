@@ -13,7 +13,7 @@ async def register(request_body: RegisterSchema):
 
 
 @router.post("/login", response_model=ResponseSchema)
-async def login(request_body: RegisterSchema):
+async def login(request_body: LoginSchema):
     token = await AuthService.login_service(request_body)
     return ResponseSchema(detail="Successfully login",
                           result={"token_type": "Bearer", "access_token": token})
