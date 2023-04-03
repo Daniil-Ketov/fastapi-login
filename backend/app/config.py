@@ -34,7 +34,7 @@ db = AsyncDatabaseSession()
 
 async def commit_rollback():
     try:
-        await db.commmit()
+        await db.commit()
     except Exception:
         await db.rollback()
         raise

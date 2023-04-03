@@ -44,7 +44,7 @@ class AuthService:
         _users = Users(id=_user_id,
                        username=register.username,
                        email=register.email,
-                       password=pwd_context(register.password),
+                       password=pwd_context.hash(register.password),
                        person_id=_person_id)
 
         # Everyone who registers through our registration page makes the default as user
