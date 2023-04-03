@@ -1,8 +1,8 @@
 from typing import List
+from sqlalchemy.future import select
+from app.config import db, commit_rollback
 from app.model.role import Role
 from app.repository.base_repo import BaseRepo
-from app.config import db, commit_rollback
-from sqlalchemy.future import select
 
 
 class RoleRepository(BaseRepo):

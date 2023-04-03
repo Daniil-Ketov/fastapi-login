@@ -1,0 +1,19 @@
+from fastapi import APIRouter, Depends, Security
+from fastapi.security import HTTPAuthorizationCredentials
+from app.schema import ResponseSchema
+from app.service.users import UserService
+from app.repository.auth_repo import JWTBearer, JWTRepo
+
+
+router = APIRouter(
+    prefix="/users",
+    tags=['user'],
+    dependencies=[Depends(JWTBearer())]
+)
+
+
+@router.post("/", response_model=ResponseSchema, response_model_exclude_none=True)
+async def get_user_profile(credentials: HTTPAuthorizationCredentials):
+    token = JWTRepo().extract_token(credentials.credentials)
+    result = await UserService.get_user_profile(token['username'])
+    return ResponseSchema(detail="Successfully fetch data!", result=result)

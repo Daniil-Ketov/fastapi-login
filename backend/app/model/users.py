@@ -1,7 +1,6 @@
 from typing import List, Optional
 from sqlalchemy import Column, String
 from sqlmodel import SQLModel, Field, Relationship
-
 from app.model.mixins import TimeMixin
 from app.model.user_role import UsersRole
 
@@ -17,5 +16,5 @@ class Users(SQLModel, TimeMixin, table=True):
     person_id: Optional[str] = Field(default=None, foreign_key="person.id")
     person: Optional["Person"] = Relationship(back_populates="users")
 
-    Roles: List["Role"] = Relationship(
+    roles: List["Role"] = Relationship(
         back_populates="users", link_model=UsersRole)
