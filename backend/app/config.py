@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
 
 
-DB_CONFIG = f"postgresql+asyncpg://postgres:jojo@localhost:5433/test"
+DB_CONFIG = f"postgresql+asyncpg://cruduser:pgpwd4crud@db:5432/crud"
 
 SECRET_KEY = "fastapiReactLogin"
 ALGORITHM = "HS256"
