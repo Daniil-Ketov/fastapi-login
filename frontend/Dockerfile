@@ -3,14 +3,12 @@
 # 1. For build React app
 FROM node:lts AS development
 
-ENV NODE_ENV=production
-
 WORKDIR /frontend
 
 COPY package.json /frontend/package.json
 COPY package-lock.json /frontend/package-lock.json
 
-RUN npm install --production
+RUN npm install
 
 COPY . /frontend
 
@@ -22,7 +20,6 @@ CMD [ "npm", "start" ]
 FROM development AS build
 
 RUN npm run build
-
 
 FROM development as dev-envs
 RUN <<EOF
